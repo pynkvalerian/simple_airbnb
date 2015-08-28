@@ -1,27 +1,46 @@
 <div class="container" align="center">
   <h1>Welcome to Simple AirBnb!</h1>
-  <p>Hello! Browse through below for properties all over the world!</p>
+  <p>Browse through below for properties all over the world!</p>
 
-<!-- REGISTER -->
-  <div class="register">
-    <button id="register">Register</button>
-    <form action="/register" method="post">
-      <input name="name" type="text" placeholder="Full Name">
-      <input name="email" type="text" placeholder="Email">
-      <input name="password" type="text" placeholder="Password">
-      <input type="submit" value="Submit">
+<% if session[:user_id].nil? %>
+  <!-- REGISTER -->
+    <div class="register">
+      <button id="register">Register</button>
+      <form action="/register" method="post">
+        <input name="name" type="text" placeholder="Full Name">
+        <input name="email" type="text" placeholder="Email">
+        <input name="password" type="text" placeholder="Password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+  <!-- LOG IN -->
+    <div class="log_in">
+      <button id="log_in">Log In</button>
+      <form action="/log_in" method="post">
+        <input name="email" type="text" placeholder="Email">
+        <input name="password" type="text" placeholder="Password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+<% elsif session[:user_id].nil? == false %>
+  <p> Hello, <%= User.find(session[:user_id]).name %></p>
+  <!-- DASHBOARD -->
+  <div class="dashboard">
+    <form action="/dashboard" method="post">
+      <input type="submit" value="Your Dashboard">
     </form>
   </div>
 
-<!-- LOG IN -->
-  <div class="log_in">
-    <button id="log_in">Log In</button>
-    <form action="/log_in" method="post">
-      <input name="email" type="text" placeholder="Email">
-      <input name="password" type="text" placeholder="Password">
-      <input type="submit" value="Submit">
+  <!-- LOG OUT -->
+  <div class="log_out">
+    <form action="/log_out" method="post">
+      <input type="submit" value="Log Out">
     </form>
   </div>
+
+<% end %>
 
 <!-- DISPLAYS ALL PROPERTIES -->
   <h4>Properties</h4>

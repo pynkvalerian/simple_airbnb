@@ -2,6 +2,13 @@
   <h1>Hello there, <%= @current_user.name %> !</h1>
   <p>Manage your properties.</p>
 
+<!-- HOME -->
+  <div class="log_out">
+    <form action="/" method="post">
+      <input type="submit" value="Homepage">
+    </form>
+  </div>
+
 <!-- LOG OUT -->
   <div class="log_out">
     <form action="/log_out" method="post">
@@ -28,7 +35,7 @@
 
 <!-- DISPLAYS ALL PROPERTIES BY USER -->
   <% else %>
-    <h4>Properties</h4>
+    <h4>Your Listed Properties</h4>
     <table>
       <tr>
         <th>Property</th>
@@ -55,9 +62,35 @@
           </td>
       <% end %>
         </tr>
-
     </table>
-
   <% end %>
+
+<!-- DISPLAY USER BOOKINGS -->
+  <h4>Your Bookings</h4>
+    <table>
+      <tr>
+        <th>Property</th>
+        <th>Description</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+      <% @current_user.bookings.each do |booking| %>
+        <% booked_property = Booking.find_property(booking.property_id) %>
+        <tr>
+          <td>
+            <a href="/property/<%= booked_property.id %>">
+              <%= booked_property.title %>
+            </a>
+          </td>
+          <td><%= booked_property.description %></td>
+          <td><%= booked_property.address %></td>
+          <td><%= booked_property.price %></td>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.end_date %></td>
+        </tr>
+      <% end %>
+    </table>
 
 </div>

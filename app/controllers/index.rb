@@ -4,6 +4,10 @@ get '/' do
   erb :index
 end
 
+post '/' do
+  redirect to('/')
+end
+
 post '/tags' do
   arr_tags = []
   tags = params[:tags]

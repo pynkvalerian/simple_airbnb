@@ -5,6 +5,7 @@ post '/register' do
   password = params[:password]
 
   @new_user = User.create(name: name, email: email, password: password)
+  byebug
   session[:user_id] = @new_user.id
 
   redirect to("/dashboard")
@@ -25,6 +26,10 @@ post '/log_in' do
 end
 
 # USER DASHBOARD
+post '/dashboard' do
+  redirect to('/dashboard')
+end
+
 get '/dashboard' do
   if session[:user_id].nil?
     redirect to('/')

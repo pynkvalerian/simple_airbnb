@@ -2,6 +2,20 @@
   <h1>Hello there, <%= @current_user.name %> !</h1>
   <p>Manage your properties.</p>
 
+<!-- HOME -->
+  <div class="log_out">
+    <form action="/" method="post">
+      <input type="submit" value="Homepage">
+    </form>
+  </div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+  <form action="/dashboard" method="post">
+    <input type="submit" value="Dashboard">
+  </form>
+</div>
+
 <!-- LOG OUT -->
   <div class="log_out">
     <form action="/log_out" method="post">
@@ -9,6 +23,7 @@
     </form>
   </div>
 
+<!-- EDIT FORM -->
 <br>
   <form action="/property/<%= @current_property.id %>/edit" method="post">
     Title:
@@ -24,6 +39,7 @@
 
 <br>
 
+<!-- DELETE  -->
   <form action='/property/<%= @current_property.id %>/delete' method="post">
       <input type="submit" value="DELETE">
   </form>

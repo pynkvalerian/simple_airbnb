@@ -12,7 +12,8 @@ post '/add_new_property' do
   price = params[:price]
 
   if Property.existing_property?(address) == false
-    @new_property = Property.create(title: title, description: description, address: address, price: price, user_id: session[:id])
+    byebug
+    @new_property = Property.create(title: title, description: description, address: address, price: price, user_id: session[:user_id])
 
     params[:tags].split(",").each do |tag|
       @tag = Tag.find_or_create_by(name: tag)
