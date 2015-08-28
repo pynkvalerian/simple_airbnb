@@ -1,6 +1,6 @@
 <div class="container" align="center">
-  <h1>Welcome to Simple AirBnb!</h1>
-  <p>Hello! Browse through below for properties all over the world!</p>
+  <h2>Welcome to Simple AirBnb!</h2>
+  <p>Looking to book this property?</p>
 
 <!-- REGISTER -->
   <div class="register">
@@ -23,35 +23,34 @@
     </form>
   </div>
 
-<!-- DISPLAYS ALL PROPERTIES -->
-  <h4>Properties</h4>
-  <table>
-    <tr>
-      <th>Property</th>
-      <th>Address</th>
-    </tr>
-    <% @properties.each do |property| %>
+<!-- DISPLAYS PROPERTY DETAILS -->
+  <h4><%= @property.title %></h4>
+
+    <table>
       <tr>
-        <td>
-          <a href="/property/<%= property.id %>">
-            <%= property.title %>
-          </a>
-        </td>
-        <td><%= property.address %></td>
+        <th>Description</th>
+        <td><%= @property.description %></td>
       </tr>
-    <% end %>
-  </table>
-
-<!-- FILTER PROPERTIES BY TAGS -->
-  <h4> Filter by tags </h4>
-  <form action="/tags" method="post">
-    <% Tag.all.each_with_index do |tag, i| %>
-      <input name="<%="tags[" + tag.name + "]"%>" type="checkbox"> <%=tag.name%>
-    <% end %>
-    <br><br>
-    <input type="submit" value="Filter">
-  </form>
-
-
+      <tr>
+        <th>Address</th>
+        <td><%= @property.address %></td>
+      </tr>
+      <tr>
+        <th>Price</th>
+        <td>$<%= @property.price %> per night</td>
+      </tr>
+      <tr>
+        <th>Tags</th>
+        <td><% @property.tags.each do |tag| %>
+            <%= tag.name %>
+        <% end %></td>
+      </tr>
+      <tr>
+        <th>Owner</th>
+        <td><a href="mailto:<%= @property.user.email %>">
+            <%= @property.user.name %></a>
+        </td>
+      </tr>
+    </table>
 </div>
 

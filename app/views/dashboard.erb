@@ -1,0 +1,63 @@
+<div class="container" align="center">
+  <h1>Hello there, <%= @current_user.name %> !</h1>
+  <p>Manage your properties.</p>
+
+<!-- LOG OUT -->
+  <div class="log_out">
+    <form action="/log_out" method="post">
+      <input type="submit" value="Log Out">
+    </form>
+  </div>
+
+<!-- ADD NEW PROPERTY -->
+  <div class="add_new_property">
+    <button id="add_new_property">Add New Property Listing</button>
+    <form action="/add_new_property" method="post">
+      Title: <input name="title" type="text" placeholder="Property Title"><br>
+      Description: <textarea name="description" placeholder="Description"></textarea><br>
+      Address: <input name="address" type="text" placeholder="Property Address"><br>
+      Price: <input name="price" type="text" placeholder="Price per Night"><br>
+      Tags: <input name="tags" type="text" placeholder="Tags (separated by comma)"><br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+<!-- NO PROPERTIES LISTED -->
+  <% if @properties.nil? %>
+    <p>You did not list any properties!</p>
+
+<!-- DISPLAYS ALL PROPERTIES BY USER -->
+  <% else %>
+    <h4>Properties</h4>
+    <table>
+      <tr>
+        <th>Property</th>
+        <th>Description</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Tags</th>
+      </tr>
+      <% @properties.each do |property| %>
+        <tr>
+          <td>
+            <a href="/property/<%= property.id %>">
+              <%= property.title %>
+            </a>
+          </td>
+          <td><%= property.description %></td>
+          <td><%= property.address %></td>
+          <td><%= property.price %></td>
+          <td><% property.tags.each do |tag| %>
+            <%= tag.name %>
+            <% end %></td>
+          <td>
+            <a href='/property/<%= property.id %>/edit' class="button">Edit</a>
+          </td>
+      <% end %>
+        </tr>
+
+    </table>
+
+  <% end %>
+
+</div>
