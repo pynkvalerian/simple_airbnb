@@ -1,25 +1,27 @@
-<div class="container" align="center">
-  <h1>Hello there, <%= @current_user.name %> !</h1>
-  <p>Manage your properties.</p>
+<div class="container">
 
 <!-- HOME -->
-  <div class="log_out">
+  <div class="control">
     <form action="/" method="post">
-      <input type="submit" value="Homepage">
+      <input type="submit" value="Homepage" class="btn btn-primary">
     </form>
   </div>
 
 <!-- LOG OUT -->
-  <div class="log_out">
+  <div class="control">
     <form action="/log_out" method="post">
-      <input type="submit" value="Log Out">
+      <input type="submit" value="Log Out" class="btn btn-primary">
     </form>
   </div>
 
+<!-- HEADER GREETING -->
+  <h1>Hello there, <%= @current_user.name %> !</h1>
+  <p>Manage your properties.</p>
+
 <!-- ADD NEW PROPERTY -->
   <div class="add_new_property">
-    <button id="add_new_property">Add New Property Listing</button>
-    <form action="/add_new_property" method="post">
+    <button id="add_new_property" class="btn btn-primary">Add New Property Listing</button>
+    <form action="/add_new_property" method="post" >
       Title: <input name="title" type="text" placeholder="Property Title"><br>
       Description: <textarea name="description" placeholder="Description"></textarea><br>
       Address: <input name="address" type="text" placeholder="Property Address"><br>
@@ -36,7 +38,7 @@
 <!-- DISPLAYS ALL PROPERTIES BY USER -->
   <% else %>
     <h4>Your Listed Properties</h4>
-    <table>
+    <table class="table table-responsive">
       <tr>
         <th>Property</th>
         <th>Description</th>
@@ -67,7 +69,7 @@
 
 <!-- DISPLAY USER BOOKINGS -->
   <h4>Your Bookings</h4>
-    <table>
+    <table class="table table-responsive">
       <tr>
         <th>Property</th>
         <th>Description</th>

@@ -1,3 +1,5 @@
+
+# HOME PAGE
 get '/' do
   @properties = Property.all
 

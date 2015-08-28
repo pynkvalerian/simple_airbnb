@@ -1,23 +1,23 @@
-<div class="container" align="center">
+<div class="container">
   <h1>Hello there, <%= @current_user.name %> !</h1>
   <p>Manage your properties.</p>
 
 <!-- HOME -->
-  <div class="log_out">
+  <div class="control">
     <form action="/" method="post">
       <input type="submit" value="Homepage">
     </form>
   </div>
 
 <!-- DASHBOARD -->
-<div class="dashboard">
+<div class="control">
   <form action="/dashboard" method="post">
     <input type="submit" value="Dashboard">
   </form>
 </div>
 
 <!-- LOG OUT -->
-  <div class="log_out">
+  <div class="control">
     <form action="/log_out" method="post">
       <input type="submit" value="Log Out">
     </form>

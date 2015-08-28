@@ -1,9 +1,29 @@
 .container {
   margin: 20px auto;
-  width: 600px;
+  width: 800px;
   padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+  background-color: #fffaf0
 }
+
 th {
   text-align: left;
 }
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+.control {
+  display: inline-block;
+  padding: 10px;
+}
+
+.welcome {
+  text-align: left
+}
+
+.property_list {
+  padding: 10px;
+}
+

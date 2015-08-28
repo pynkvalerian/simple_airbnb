@@ -1,46 +1,60 @@
-<div class="container" align="center">
-  <h2>Welcome to Simple AirBnb!</h2>
-  <p>Looking to book this property?</p>
+<div class="container">
+
+<% if session[:user_id].nil? %>
+  <!-- REGISTER -->
+    <div class="control">
+      <button id="register" class="btn btn-primary">Register</button>
+      <form action="/register" method="post" >
+        <input name="name" type="text" placeholder="Full Name">
+        <input name="email" type="text" placeholder="Email">
+        <input name="password" type="text" placeholder="Password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+  <!-- LOG IN -->
+    <div class="control">
+      <button id="log_in" class="btn btn-primary">Log In</button>
+      <form action="/log_in" method="post">
+        <input name="email" type="text" placeholder="Email">
+        <input name="password" type="text" placeholder="Password">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+<% elsif session[:user_id].nil? == false %>
+  <p class="welcome"> Hello, <%= User.find(session[:user_id]).name %></p>
+  <!-- DASHBOARD -->
+  <div class="control">
+    <form action="/dashboard" method="post">
+      <input type="submit" value="Your Dashboard" class="btn btn-primary">
+    </form>
+  </div>
+
+  <!-- LOG OUT -->
+  <div class="control">
+    <form action="/log_out" method="post">
+      <input type="submit" value="Log Out" class="btn btn-primary">
+    </form>
+  </div>
+
+<% end %>
 
 <!-- HOME -->
-<div class="home">
-  <form action="/" method="post">
-    <input type="submit" value="Homepage">
-  </form>
-</div>
-
-<!-- DASHBOARD -->
-  <div class="dashboard">
-    <form action="/dashboard" method="post">
-      <input type="submit" value="Dashboard">
+  <div class="control">
+    <form action="/" method="post">
+      <input type="submit" value="Homepage" class="btn btn-primary">
     </form>
   </div>
 
-<!-- REGISTER -->
-  <div class="register">
-    <button id="register">Register</button>
-    <form action="/register" method="post">
-      <input name="name" type="text" placeholder="Full Name">
-      <input name="email" type="text" placeholder="Email">
-      <input name="password" type="text" placeholder="Password">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-
-<!-- LOG IN -->
-  <div class="log_in">
-    <button id="log_in">Log In</button>
-    <form action="/log_in" method="post">
-      <input name="email" type="text" placeholder="Email">
-      <input name="password" type="text" placeholder="Password">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+<!-- HEADER WELCOME -->
+  <h1>Welcome to Simple AirBnb!</h1>
+  <p>Looking to book this property?</p>
 
 <!-- DISPLAYS PROPERTY DETAILS -->
   <h4><%= @property.title %></h4>
 
-    <table>
+    <table class="table table-responsive">
       <tr>
         <th>Description</th>
         <td><%= @property.description %></td>
@@ -67,6 +81,7 @@
       </tr>
     </table>
 <hr>
+
 <!-- BOOKING FORM -->
 <div class="booking">
   <h4>Book this property:</h4>

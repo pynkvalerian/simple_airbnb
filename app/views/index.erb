@@ -1,11 +1,9 @@
-<div class="container" align="center">
-  <h1>Welcome to Simple AirBnb!</h1>
-  <p>Browse through below for properties all over the world!</p>
+<div class="container" >
 
 <% if session[:user_id].nil? %>
   <!-- REGISTER -->
-    <div class="register">
-      <button id="register">Register</button>
+    <div class="control">
+      <button id="register" class="btn btn-primary">Register</button>
       <form action="/register" method="post">
         <input name="name" type="text" placeholder="Full Name">
         <input name="email" type="text" placeholder="Email">
@@ -15,8 +13,8 @@
     </div>
 
   <!-- LOG IN -->
-    <div class="log_in">
-      <button id="log_in">Log In</button>
+    <div class="control">
+      <button id="log_in" class="btn btn-primary">Log In</button>
       <form action="/log_in" method="post">
         <input name="email" type="text" placeholder="Email">
         <input name="password" type="text" placeholder="Password">
@@ -25,41 +23,48 @@
     </div>
 
 <% elsif session[:user_id].nil? == false %>
-  <p> Hello, <%= User.find(session[:user_id]).name %></p>
+  <p class="welcome"> Hello, <%= User.find(session[:user_id]).name %></p>
   <!-- DASHBOARD -->
-  <div class="dashboard">
+  <div class="control">
     <form action="/dashboard" method="post">
-      <input type="submit" value="Your Dashboard">
+      <input type="submit" value="Your Dashboard" class="btn btn-primary">
     </form>
   </div>
 
   <!-- LOG OUT -->
-  <div class="log_out">
+  <div class="control">
     <form action="/log_out" method="post">
-      <input type="submit" value="Log Out">
+      <input type="submit" value="Log Out" class="btn btn-primary">
     </form>
   </div>
 
 <% end %>
 
+<!-- HEADER GREETING -->
+  <h1>Welcome to Simple AirBnb!</h1>
+  <p>Browse through below for properties all over the world!</p>
+
+
 <!-- DISPLAYS ALL PROPERTIES -->
-  <h4>Properties</h4>
-  <table>
-    <tr>
-      <th>Property</th>
-      <th>Address</th>
-    </tr>
-    <% @properties.each do |property| %>
+  <div class="property_list">
+    <h4>Properties</h4>
+    <table class="table table-responsive">
       <tr>
-        <td>
-          <a href="/property/<%= property.id %>">
-            <%= property.title %>
-          </a>
-        </td>
-        <td><%= property.address %></td>
+        <th>Property</th>
+        <th>Address</th>
       </tr>
-    <% end %>
-  </table>
+      <% @properties.each do |property| %>
+        <tr>
+          <td>
+            <a href="/property/<%= property.id %>">
+              <%= property.title %>
+            </a>
+          </td>
+          <td><%= property.address %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
 <!-- FILTER PROPERTIES BY TAGS -->
   <h4> Filter by tags </h4>

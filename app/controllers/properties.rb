@@ -11,10 +11,11 @@ post '/add_new_property' do
   address = params[:address]
   price = params[:price]
 
+  # CHECK IF PROPERTY ALREADY LISTED
   if Property.existing_property?(address) == false
-    byebug
     @new_property = Property.create(title: title, description: description, address: address, price: price, user_id: session[:user_id])
 
+    # ASSOCIATE TAGS TO PROPERTY
     params[:tags].split(",").each do |tag|
       @tag = Tag.find_or_create_by(name: tag)
       @tag.properties << @new_property
@@ -51,8 +52,15 @@ end
 #DELETE EXISTING PROPERTY
 post '/property/:id/delete' do
   property = Property.find(params[:id])
+  all_bookings = property.bookings
   if property.nil? == false
+    #DELETE BOOKING AS WELL
+    all_bookings.each do |booking|
+      booking.delete
+    end
     property.delete
   end
   redirect to('/dashboard')
 end
+
+
